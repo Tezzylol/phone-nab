@@ -11,16 +11,16 @@ while [ $usbcount -eq $newcount ]; do
 done
 
 #mounts phone
-gvfs-mount -li | awk -F= '{if(index($2,"mtp") == 1)system("gvfs-mount "$2)}'
+gio mount -li | awk -F= '{if(index($2,"mtp") == 1)system("gio mount "$2)}'
 
 #waits/checks if unlocked
 echo 'Connected. Waiting for unlock...'
-until [ -d /run/user/$UID/gvfs/mtp*/* ]; do	
-	:
+until [ -d $XDG_RUNTIME_DIR/gvfs/mtp* ]; do
+    :
 done
 
 #navigates to file system
-cd /run/user/$UID/gvfs/mtp*/*
+cd $XDG_RUNTIME_DIR/gvfs/mtp:host=*/*
 ls
 echo 'FILE SYSTEM ACCESSED!'
 
