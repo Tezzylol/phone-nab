@@ -15,8 +15,10 @@ gio mount -li | awk -F= '{if(index($2,"mtp") == 1)system("gio mount "$2)}'
 
 #waits/checks if unlocked
 echo 'Connected. Waiting for unlock...'
-until [ -d $XDG_RUNTIME_DIR/gvfs/mtp* ]; do
-    :
+until [ -d $XDG_RUNTIME_DIR/gvfs/mtp:host=*/* ]; do
+    if [ ! -d $XDG_RUNTIME_DIR/gvfs/mtp:host=* ]; then
+    	gio mount -li | awk -F= '{if(index($2,"mtp") == 1)system("gio mount "$2)}'
+    fi
 done
 
 #navigates to file system
