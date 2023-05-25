@@ -1,6 +1,9 @@
 # phone-nab
 Project to implement and automate juice jacking: the stealing and manipulation of phone data through USB connections.
 
+## Update
+Updated the scripts to work with Kali
+
 ## Ransomware
 
 The first functionality is for a host computer to encrypt a phone's camera photos.
